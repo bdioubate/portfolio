@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html {
     /* Size fonts */
         /* Desktop */
@@ -197,6 +202,7 @@ section {
 
 header {
     position: fixed;
+    top: 0;
     height: 100px;
     display: flex;
     align-items: center;

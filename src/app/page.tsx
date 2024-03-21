@@ -1,6 +1,8 @@
 'use client'
 //next
 import Link from "next/link";
+import { Inter } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
 
 //assets
   //profiles
@@ -43,7 +45,7 @@ export default function Home() {
 
   return (
     <html lang="fr" className={mode ? 'dark-mode' : 'light-mode'}>
-      <body>
+      <body className={inter.className}>
         <Banner />
         <main>
           <div id="wrapper">
@@ -70,7 +72,7 @@ export default function Home() {
               </div>
             </div>
             <div id="profile__img">
-            <img src={profileImgDark.src} alt="La photo de profil de Bangali DIOUBATE" />
+              <img src={mode ? profileImgDark.src : profileImgLight.src } alt="La photo de profil de Bangali DIOUBATE" />
             </div>
           </section>
           <section id="about">
