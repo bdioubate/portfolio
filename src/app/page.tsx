@@ -20,6 +20,7 @@ import javaLogos from "../assets/logos/java.svg";
 //Components
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
+import Form from "../components/Form";
 export default function Home() {
   return (
     <body>
@@ -85,6 +86,7 @@ export default function Home() {
           <div className="section-title">
             <h2>CONTACT</h2>
           </div>
+          <Form />
         </section>
       </main>
       <Footer />
