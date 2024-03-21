@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+//Components
+import DarkModeToggle from "../components/DarkModeToggle";
+
 const Header = () => {
 
   return (
@@ -14,6 +17,7 @@ const Header = () => {
           <Link href="#projects">Projets</Link>
           <Link href="#contact">Contact</Link>
         </nav>
+        <DarkModeToggle />
         </div>
     </header>
   );
