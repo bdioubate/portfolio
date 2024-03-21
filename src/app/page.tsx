@@ -1,95 +1,88 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+//next
+import Link from "next/link";
+
+//assets
+  //profiles
+import profileImgLight from "../assets/profiles/profile_light.svg";
+import profileImgDark from "../assets/profiles/profile_dark.svg";
+  //logos
+import linkedinLogo from "../assets/logos/linkedin.svg";
+import githubLogo from "../assets/logos/github.svg";
+import html5Logos from "../assets/logos/html5.svg";
+import css3Logos from "../assets/logos/css3.svg";
+import jsLogos from "../assets/logos/js.svg";
+import reactLogos from "../assets/logos/react.svg";
+import gitLogos from "../assets/logos/git.svg";
+import githubLogos from "../assets/logos/github.svg";
+import pythonLogos from "../assets/logos/python.svg";
+import javaLogos from "../assets/logos/java.svg";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <body>
+      <main>
+        <div id="wrapper">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <section id="profile"> 
+          <div id="profile__information">
+            <h1>Développeur informatique</h1>
+            <button>
+              <Link href="#contact">Me Contacter</Link>
+            </button>
+            <div id="iconsFooter">
+              <img src={linkedinLogo.src} alt="Logo LinkedInd" />
+              <img src={githubLogo.src} alt="Logo GitHub" />
+            </div>
+          </div>
+          <div id="profile__img">
+          <img src={profileImgDark.src} alt="La photo de profil de Bangali DIOUBATE" />
+          </div>
+        </section>
+        <section id="about">
+          <div className="section-title">
+            <h2>A PROPOS</h2>
+          </div>
+          <div id="about__main">
+            <div id="about__main__presentation">
+              <p>En tant que développeur web passionné par les dernières technologies de l'information et de la communication, 
+              j'ai acquis une grande expertise dans la conception et le développement de sites web modernes et dynamiques.</p>
+            </div>
+            <div id="about__main__information">
+              <button>Telecharger mon CV</button>
+              <div id="about__main__information__skills">
+                <img src={html5Logos.src} alt="Logo HTML5" />
+                <img src={css3Logos.src} alt="Logo CSS3" />
+                <img src={jsLogos.src} alt="Logo Javascript" />
+                <img src={gitLogos.src} alt="Logo Git" />
+                <img src={githubLogos.src} alt="Logo GitHub" />
+                <img src={reactLogos.src} alt="Logo React" />
+                <img src={pythonLogos.src} alt="Logo Python" />
+                <img src={javaLogos.src} alt="Logo Java" />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="projects">
+          <div className="section-title">
+            <h2>PROJETS</h2>
+          </div>
+        </section>
+        <section id="contact">
+          <div className="section-title">
+            <h2>CONTACT</h2>
+          </div>
+        </section>
+      </main>
+    </body>
   );
 }
