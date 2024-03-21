@@ -17,11 +17,16 @@ import gitLogos from "../assets/logos/git.svg";
 import githubLogos from "../assets/logos/github.svg";
 import pythonLogos from "../assets/logos/python.svg";
 import javaLogos from "../assets/logos/java.svg";
+  //data
+//Project
+import projectlist from "../data/projects.json"
+
 
 //Components
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Form from "../components/Form";
+import SliderProjects from "../components/SliderProjects";
 
 //redux
 import { useSelector } from 'react-redux'
@@ -96,6 +101,9 @@ export default function Home() {
             <div className="section-title">
               <h2>PROJETS</h2>
             </div>
+            <SliderProjects
+              articles={projectlist}
+            />
           </section>
           <section id="contact">
             <div className="section-title">
