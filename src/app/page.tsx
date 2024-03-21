@@ -19,7 +19,7 @@ import javaLogos from "../assets/logos/java.svg";
 
 //Components
 import Banner from "../components/Banner";
-
+import Footer from "../components/Footer";
 export default function Home() {
   return (
     <body>
@@ -87,6 +87,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </body>
   );
 }
