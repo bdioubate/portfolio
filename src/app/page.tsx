@@ -17,9 +17,13 @@ import githubLogos from "../assets/logos/github.svg";
 import pythonLogos from "../assets/logos/python.svg";
 import javaLogos from "../assets/logos/java.svg";
 
+//Components
+import Banner from "../components/Banner";
+
 export default function Home() {
   return (
     <body>
+      <Banner />
       <main>
         <div id="wrapper">
           <div></div>
