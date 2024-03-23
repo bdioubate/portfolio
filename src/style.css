@@ -65,9 +65,6 @@ button {
     border-color: var(--dark);
 }
 
-
-  
-
 /* Dark-mode */
 html.dark-mode {
     background-color: var(--dark);
@@ -78,7 +75,7 @@ html.dark-mode {
 .dark-mode textarea::placeholder, .dark-mode button {
     color: var(--light);
 }
-.dark-mode header, .dark-mode input, .dark-mode textarea {
+.dark-mode header, .dark-mode input, .dark-mode textarea, .dark-mode #header__nav nav {
     background-color: var(--dark);
 }
 .dark-mode button {
@@ -202,7 +199,6 @@ section {
 
 header {
     position: fixed;
-    top: 0;
     height: 100px;
     display: flex;
     align-items: center;
@@ -233,10 +229,21 @@ header h3, header #header__nav nav a {
     background: none;
     width: 40px;
     height: 40px;
-    display: grid;
-    place-items: center;
     border: none;
     cursor: pointer;
+}
+#header__nav #dark_mode {
+    display: grid;
+    place-items: center;
+}
+#header__nav #close_menu {
+    display: none;
+    position: fixed;
+    top: 24px;
+    right: 24px;
+}
+#header__nav #display_menu {
+    display: none;
 }
 
 section#profile {
@@ -558,3 +565,39 @@ footer#footer .divFooter p {
         padding: 0 90px;
     }
 }
+
+    /* Menu Burger */
+    @media screen and (max-width: 900px) {
+        header, main, footer {
+            padding: 0 20px;
+        }
+    }
+    @media screen and (max-width: 700px) {
+        header {
+            gap: 0;
+        }
+        header #header__nav {
+            justify-content: end;
+            min-width: 0;
+        }
+    
+        #header__nav nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            flex-direction: column;
+            height: 100vh;
+            background-color: var(--light);
+            width: 320px;
+            z-index: 2;
+            justify-content: space-evenly;
+            display: none;
+        }
+    
+        #header__nav #close_menu {
+            display: block;
+        }
+        #header__nav #display_menu {
+            display: block;
+        }
+    }
