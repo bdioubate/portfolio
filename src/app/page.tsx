@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
+import Image from 'next/image';
 
 //assets
   //profiles
@@ -67,12 +68,12 @@ export default function Home() {
                 <Link href="#contact">Me Contacter</Link>
               </button>
               <div id="iconsFooter">
-                <img src={linkedinLogo.src} alt="Logo LinkedInd" />
-                <img src={githubLogo.src} alt="Logo GitHub" />
+                <Image src={linkedinLogo.src} alt="Logo LinkedInd" />
+                <Image src={githubLogo.src} alt="Logo GitHub" />
               </div>
             </div>
             <div id="profile__img">
-              <img src={mode ? profileImgDark.src : profileImgLight.src } alt="La photo de profil de Bangali DIOUBATE" />
+              <Image src={mode ? profileImgDark.src : profileImgLight.src } alt="La photo de profil de Bangali DIOUBATE" />
             </div>
           </section>
           <section id="about">
@@ -81,20 +82,20 @@ export default function Home() {
             </div>
             <div id="about__main">
               <div id="about__main__presentation">
-                <p>En tant que développeur web passionné par les dernières technologies de l'information et de la communication, 
-                j'ai acquis une grande expertise dans la conception et le développement de sites web modernes et dynamiques.</p>
+                <p>En tant que développeur web passionné par les dernières technologies de l&apos;information et de la communication, 
+                j&apos;ai acquis une grande expertise dans la conception et le développement de sites web modernes et dynamiques.</p>
               </div>
               <div id="about__main__information">
                 <button>Telecharger mon CV</button>
                 <div id="about__main__information__skills">
-                  <img src={html5Logos.src} alt="Logo HTML5" />
-                  <img src={css3Logos.src} alt="Logo CSS3" />
-                  <img src={jsLogos.src} alt="Logo Javascript" />
-                  <img src={gitLogos.src} alt="Logo Git" />
-                  <img src={githubLogos.src} alt="Logo GitHub" />
-                  <img src={reactLogos.src} alt="Logo React" />
-                  <img src={pythonLogos.src} alt="Logo Python" />
-                  <img src={javaLogos.src} alt="Logo Java" />
+                  <Image src={html5Logos.src} alt="Logo HTML5" />
+                  <Image src={css3Logos.src} alt="Logo CSS3" />
+                  <Image src={jsLogos.src} alt="Logo Javascript" />
+                  <Image src={gitLogos.src} alt="Logo Git" />
+                  <Image src={githubLogos.src} alt="Logo GitHub" />
+                  <Image src={reactLogos.src} alt="Logo React" />
+                  <Image src={pythonLogos.src} alt="Logo Python" />
+                  <Image src={javaLogos.src} alt="Logo Java" />
                 </div>
               </div>
             </div>

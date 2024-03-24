@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleDarkMode } from "../GlobalRedux/redux";
@@ -23,7 +24,7 @@ const DarkModeToggle = ({}: ToggleDarkModeProps) => {
 
   return (
     <button id="dark_mode" onClick={handleToggleDarkMode}>
-      <img src={ mode ? sunIcon.src : moonIcon.src} alt="L'icone du darkmode" /> 
+      <Image src={ mode ? sunIcon.src : moonIcon.src} alt="L'icone du darkmode" /> 
     </button> 
   );
 };

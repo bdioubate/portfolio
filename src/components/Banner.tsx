@@ -1,5 +1,6 @@
 //next
 import Link from "next/link";
+import Image from 'next/image';
 
 //react
 import { useEffect } from 'react';
@@ -66,7 +67,7 @@ const Header = () => {
       <div id="header__nav">
         <nav>
           <button id="close_menu" onClick={closeMenu}>
-            <img src={ mode ? CloseMenuLight.src : CloseMenuDark.src} alt="L'icone close du menu" />
+            <Image src={ mode ? CloseMenuLight.src : CloseMenuDark.src} alt="L'icone close du menu" />
           </button>
           <Link href="#profile">Profil</Link>
           <Link href="#about">À propos</Link>
@@ -74,7 +75,7 @@ const Header = () => {
           <Link href="#contact">Contact</Link>
         </nav>
         <button id="display_menu" onClick={displayMenu}>
-          <img src={ mode ? BurgerBarLight.src : BurgerBarDark.src} alt="L'icone du burger bar" /> 
+          <Image src={ mode ? BurgerBarLight.src : BurgerBarDark.src} alt="L'icone du burger bar" /> 
         </button>
         <DarkModeToggle />
         </div>
