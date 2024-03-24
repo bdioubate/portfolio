@@ -22,7 +22,7 @@ const DarkModeToggle = ({}: ToggleDarkModeProps) => {
   };
 
   return (
-    <button onClick={handleToggleDarkMode}>
+    <button id="dark_mode" onClick={handleToggleDarkMode}>
       <img src={ mode ? sunIcon.src : moonIcon.src} alt="L'icone du darkmode" /> 
     </button> 
   );
