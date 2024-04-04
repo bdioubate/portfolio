@@ -68,12 +68,12 @@ export default function Home() {
                 <Link href="#contact">Me Contacter</Link>
               </button>
               <div id="iconsFooter">
-                <Image src={linkedinLogo.src} alt="Logo LinkedInd" />
-                <Image src={githubLogo.src} alt="Logo GitHub" />
+                <Image width={40} height={40} src={linkedinLogo.src} alt="Logo LinkedInd" />
+                <Image width={40} height={40} src={githubLogo.src} alt="Logo GitHub" />
               </div>
             </div>
             <div id="profile__img">
-              <Image src={mode ? profileImgDark.src : profileImgLight.src } alt="La photo de profil de Bangali DIOUBATE" />
+              <Image width={600} height={600} src={mode ? profileImgDark.src : profileImgLight.src } alt="La photo de profil de Bangali DIOUBATE" />
             </div>
           </section>
           <section id="about">
@@ -88,14 +88,14 @@ export default function Home() {
               <div id="about__main__information">
                 <button>Telecharger mon CV</button>
                 <div id="about__main__information__skills">
-                  <Image src={html5Logos.src} alt="Logo HTML5" />
-                  <Image src={css3Logos.src} alt="Logo CSS3" />
-                  <Image src={jsLogos.src} alt="Logo Javascript" />
-                  <Image src={gitLogos.src} alt="Logo Git" />
-                  <Image src={githubLogos.src} alt="Logo GitHub" />
-                  <Image src={reactLogos.src} alt="Logo React" />
-                  <Image src={pythonLogos.src} alt="Logo Python" />
-                  <Image src={javaLogos.src} alt="Logo Java" />
+                  <Image width={80} height={80} src={html5Logos.src} alt="Logo HTML5" />
+                  <Image width={80} height={80} src={css3Logos.src} alt="Logo CSS3" />
+                  <Image width={80} height={80} src={jsLogos.src} alt="Logo Javascript" />
+                  <Image width={80} height={80} src={gitLogos.src} alt="Logo Git" />
+                  <Image width={80} height={80} src={githubLogos.src} alt="Logo GitHub" />
+                  <Image width={80} height={80} src={reactLogos.src} alt="Logo React" />
+                  <Image width={80} height={80} src={pythonLogos.src} alt="Logo Python" />
+                  <Image width={80} height={80} src={javaLogos.src} alt="Logo Java" />
                 </div>
               </div>
             </div>

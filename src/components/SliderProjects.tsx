@@ -88,9 +88,9 @@ const SliderProjects = ({ articles }: SliderProps) => {
         <button className='btn_pagination' key={i} onClick={() => setCurrentPage(i + 1)}>
           {currentPage === i + 1
             ? 
-            <Image src={Btn_pagination.src} alt="Bouton actuelle de la pagination" /> 
+            <Image width={20} height={20} src={Btn_pagination.src} alt="Bouton actuelle de la pagination" /> 
                 : 
-            <Image src={Btn_pagination__gray.src} alt="Bouton actuelle de la pagination" />}
+            <Image width={20} height={20} src={Btn_pagination__gray.src} alt="Bouton actuelle de la pagination" />}
         </button>
       );
     }
@@ -109,15 +109,15 @@ const SliderProjects = ({ articles }: SliderProps) => {
         {currentArticles.map((article, index) => (
           <article key={index} className="project">
             <figure>
-              <Image className='figure_img' src={Example_project.src} alt="Une icone de la lune" />
+              <Image width={400} height={280} className='figure_img' src={Example_project.src} alt="Une icone de la lune" />
               <figcaption>
                 <div className='figcaption_type'><h5>{article.type}</h5></div>
                 <div className='figcaption_name'><h4>{article.name}</h4></div>
                 <div className='figcaption_github_link'>
-                  <h5>Github<Link href={article.github_link}><Image className='project_figcaption_img' src={Github_link.src} alt="icone du lien github" /></Link></h5>
+                  <h5>Github<Link href={article.github_link}><Image width={40} height={40} className='project_figcaption_img' src={Github_link.src} alt="icone du lien github" /></Link></h5>
                 </div>
                 <div className='figcaption_demo_link'>
-                  <h5>Voir Demo<Link href={article.demo_link}><Image className='project_figcaption_img' src={Demo_link.src} alt="icone du lien demo" /></Link></h5>
+                  <h5>Voir Demo<Link href={article.demo_link}><Image width={40} height={40} className='project_figcaption_img' src={Demo_link.src} alt="icone du lien demo" /></Link></h5>
                 </div>
               </figcaption>
             </figure>
@@ -126,11 +126,11 @@ const SliderProjects = ({ articles }: SliderProps) => {
       </div>
       <div id='sliderPagination'>
         <button className='chevron_project' id='chevron_project_prev' onClick={handlePrevPage} disabled={currentPage === 1}>
-          <Image src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent" />
+          <Image width={80} height={80} src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent" />
         </button>
         {renderPagination()}
         <button className='chevron_project' id='chevron_project_next' onClick={handleNextPage} disabled={currentPage === totalPages}>
-          <Image src={mode ? Chevron_next_light.src : Chevron_next_dark.src} alt="Chevron suivant" />
+          <Image width={80} height={80} src={mode ? Chevron_next_light.src : Chevron_next_dark.src} alt="Chevron suivant" />
         </button>
       </div>
     </div>

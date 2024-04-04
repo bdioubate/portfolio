@@ -10,7 +10,7 @@ import DarkModeToggle from "../components/DarkModeToggle";
 
 //assets 
   //icons
-import CloseMenuDark from "../assets/icons/close_menu_dark.svg"
+import CloseMenuDark from "../assets/icons/close_menu_light.svg"
 import CloseMenuLight from "../assets/icons/close_menu_light.svg"
 import BurgerBarDark from "../assets/icons/burger_bar_dark.svg";
 import BurgerBarLight from "../assets/icons/burger_bar_light.svg"
@@ -67,7 +67,7 @@ const Header = () => {
       <div id="header__nav">
         <nav>
           <button id="close_menu" onClick={closeMenu}>
-            <Image src={ mode ? CloseMenuLight.src : CloseMenuDark.src} alt="L'icone close du menu" />
+            <Image fill={true} src={ mode ? CloseMenuLight.src : CloseMenuDark.src} alt="L'icone close du menu" />
           </button>
           <Link href="#profile">Profil</Link>
           <Link href="#about">À propos</Link>
@@ -75,7 +75,7 @@ const Header = () => {
           <Link href="#contact">Contact</Link>
         </nav>
         <button id="display_menu" onClick={displayMenu}>
-          <Image src={ mode ? BurgerBarLight.src : BurgerBarDark.src} alt="L'icone du burger bar" /> 
+          <Image fill={true} src={ mode ? BurgerBarLight.src : BurgerBarDark.src} alt="L'icone du burger bar" /> 
         </button>
         <DarkModeToggle />
         </div>

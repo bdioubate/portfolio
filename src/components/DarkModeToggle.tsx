@@ -24,7 +24,7 @@ const DarkModeToggle = ({}: ToggleDarkModeProps) => {
 
   return (
     <button id="dark_mode" onClick={handleToggleDarkMode}>
-      <Image src={ mode ? sunIcon.src : moonIcon.src} alt="L'icone du darkmode" /> 
+      <Image fill={true} src={ mode ? sunIcon.src : moonIcon.src} alt="L'icone du darkmode" /> 
     </button> 
   );
 };
