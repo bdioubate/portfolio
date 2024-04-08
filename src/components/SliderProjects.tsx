@@ -40,6 +40,8 @@ interface SliderProps {
 const SliderProjects = ({ articles }: SliderProps) => {
   const { mode } = useSelector((state: RootState) => state.darkMode);
 
+  const [direction, setDirection] = useState(""); // Direction du défilement
+
   const [articlesPerPage, setArticlesPerPage] = useState(6); // Par défaut 6 articles par page
   const [currentPage, setCurrentPage] = useState(1); // Page actuelle
 
@@ -75,17 +77,29 @@ const SliderProjects = ({ articles }: SliderProps) => {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    setDirection("next");
   };
 
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    setDirection("prev");
+  };
+
+  const handlePaginationClick = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    // Déterminez la direction de l'animation de pagination
+    if (pageNumber > currentPage) {
+      setDirection("next");
+    } else {
+      setDirection("prev");
+    }
   };
 
   const renderPagination = () => {
     const pagination = [];
     for (let i = 0; i < totalPages; i++) {
       pagination.push(
-        <button className='btn_pagination' key={i} onClick={() => setCurrentPage(i + 1)}>
+        <button className='btn_pagination' key={i} onClick={() => handlePaginationClick(i + 1)}>
           {currentPage === i + 1
             ? 
             <Image width={20} height={20} src={Btn_pagination.src} alt="Bouton actuelle de la pagination" /> 
@@ -105,11 +119,11 @@ const SliderProjects = ({ articles }: SliderProps) => {
 
   return (
     <div id='sp'>
-      <div id="sliderProjects">
+      <div id="sliderProjects" className={`${direction}`} >
         {currentArticles.map((article, index) => (
           <article key={index} className="project">
             <figure>
-              <Image width={400} height={280} className='figure_img' src={Example_project.src} alt="Une icone de la lune" />
+              <Image width={400} height={280} className='figure_img' src={Example_project.src} alt="Image du site" />
               <figcaption>
                 <div className='figcaption_type'><h5>{article.type}</h5></div>
                 <div className='figcaption_name'><h4>{article.name}</h4></div>
@@ -121,16 +135,17 @@ const SliderProjects = ({ articles }: SliderProps) => {
                 </div>
               </figcaption>
             </figure>
+            <p>{index}</p>
           </article>
         ))}
       </div>
       <div id='sliderPagination'>
-        <button className='chevron_project' id='chevron_project_prev' onClick={handlePrevPage} disabled={currentPage === 1}>
-          <Image width={80} height={80} src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent" />
+        <button className='chevron_project' id='chevron_project_prev' onClick={handlePrevPage} disabled={currentPage === 1} >
+          <Image width={80} height={80} src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent"  style={{ opacity: currentPage === 1 ? 0.4 : 1 }}  />
         </button>
         {renderPagination()}
         <button className='chevron_project' id='chevron_project_next' onClick={handleNextPage} disabled={currentPage === totalPages}>
-          <Image width={80} height={80} src={mode ? Chevron_next_light.src : Chevron_next_dark.src} alt="Chevron suivant" />
+          <Image width={80} height={80} src={mode ? Chevron_next_light.src : Chevron_next_dark.src} alt="Chevron suivant" style={{ opacity: currentPage === totalPages ? 0.4 : 1 }} />
         </button>
       </div>
     </div>
