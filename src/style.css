@@ -196,6 +196,17 @@ section {
     width: 100%;
     padding-top: 100px;
 }
+button, #about__main__information__skills img, #iconsFooter img{
+    transform: scale(1);
+    transition: .8s;
+    cursor: pointer;
+}
+button:hover, #about__main__information__skills img:hover, #iconsFooter img:hover{
+    transform: scale(1.2);
+}
+a {
+    text-decoration: none;
+}
 
 header {
     position: fixed;
@@ -343,6 +354,10 @@ section#projects #sliderProjects {
     gap: 38px;
     width: 100%;
     justify-items: center;
+    align-items: center;
+    height: 598px;
+    min-height: 598px;
+    max-height: 598px;
 
 }
 #sliderProjects .project{
@@ -408,15 +423,17 @@ figcaption .figcaption_demo_link {
 
 #sp button.chevron_project{
     position: absolute;
-    top: 50%;
-    transform: translate(0%, -100%);
+    top: 37%;
+    /*transform: translate(0%, -100%);*/
     border: none;
     background: none;
     cursor: pointer;
     width: 40px;
+    display: none;
 }
 button.chevron_project img{
     width: 100%;
+    height: 100%;
 }
 #chevron_project_prev {
     left: 0;
@@ -553,9 +570,9 @@ footer#footer .divFooter p {
 
 
 /* Media Queries */
-@media screen and (min-width: 1436px) {
-    #sp button.chevron_project{
-        display: none;
+@media screen and (max-width: 1436px) {
+    #sp button.chevron_project {
+        display: block;
     }
 }
 
@@ -566,6 +583,12 @@ footer#footer .divFooter p {
     #sp {
         padding: 0 90px;
     }
+    section#projects #sliderProjects {
+        height: auto;
+        min-height: auto;
+        max-height: auto;
+    }
+
 }
 
     /* Menu Burger */
@@ -671,8 +694,9 @@ footer#footer .divFooter p {
             border-radius: 0 0 15% 15%;
         }
 
-        #sliderProjects .project figure img {
+        #sliderProjects .project figure figcaption img {
             width: auto;
+            height: auto;
         }
 
         section#contact form button {
@@ -694,3 +718,41 @@ footer#footer .divFooter p {
         }
     }
    
+
+
+/* SliderProjects.css */
+
+/* Animation de défilement depuis la droite */
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Animation de défilement depuis la gauche */
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+ 
+
+  /* Appliquer l'animation pour la direction 'prev' */
+#sliderProjects.prev, #sliderPagination.prev {
+    animation: slideInFromLeft 1.8s ease; /* Utilisez une durée plus longue pour un défilement plus lent */
+  }
+  
+  /* Appliquer l'animation pour la direction 'next' */
+  #sliderProjects.next, #sliderPagination.next {
+    animation: slideInFromRight 1.8s ease; /* Utilisez une durée plus longue pour un défilement plus lent */
+  }
