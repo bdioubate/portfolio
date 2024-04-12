@@ -10,7 +10,7 @@ import DarkModeToggle from "../components/DarkModeToggle";
 
 //assets 
   //icons
-import CloseMenuDark from "../assets/icons/close_menu_light.svg"
+import CloseMenuDark from "../assets/icons/close_menu_dark.svg"
 import CloseMenuLight from "../assets/icons/close_menu_light.svg"
 import BurgerBarDark from "../assets/icons/burger_bar_dark.svg";
 import BurgerBarLight from "../assets/icons/burger_bar_light.svg"
