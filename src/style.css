@@ -361,7 +361,8 @@ section#projects #sliderProjects {
 
 }
 #sliderProjects .project{
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 280px;
     
 }
@@ -580,14 +581,19 @@ footer#footer .divFooter p {
     #sp #sliderPagination button.btn_pagination{
         display: none;
     }
-    #sp {
+    section#projects #sp {
         padding: 0 90px;
+        gap: 0;
     }
     section#projects #sliderProjects {
         height: auto;
         min-height: auto;
         max-height: auto;
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        grid-gap: 0;
+        gap: 0;
     }
+
 
 }
 
@@ -672,7 +678,6 @@ footer#footer .divFooter p {
         #sp button.chevron_project {
             width: 8%;
             max-width: 8%;
-            transform: translate(0%, -50%);
         }
         
         section#projects #sliderProjects {

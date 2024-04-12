@@ -27,6 +27,7 @@ interface RootState {
 }
 
 interface Article {
+  id: number;
   type: string;
   name: string;
   github_link: string;
@@ -39,8 +40,6 @@ interface SliderProps {
 
 const SliderProjects = ({ articles }: SliderProps) => {
   const { mode } = useSelector((state: RootState) => state.darkMode);
-
-  const [direction, setDirection] = useState(""); // Direction du défilement
 
   const [articlesPerPage, setArticlesPerPage] = useState(6); // Par défaut 6 articles par page
   const [currentPage, setCurrentPage] = useState(1); // Page actuelle
@@ -77,23 +76,16 @@ const SliderProjects = ({ articles }: SliderProps) => {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    setDirection("next");
   };
 
   const handlePrevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    setDirection("prev");
+    
   };
 
   const handlePaginationClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    // Déterminez la direction de l'animation de pagination
-    if (pageNumber > currentPage) {
-      setDirection("next");
-    } else {
-      setDirection("prev");
-    }
-  };
+  }
 
   const renderPagination = () => {
     const pagination = [];
@@ -119,7 +111,7 @@ const SliderProjects = ({ articles }: SliderProps) => {
 
   return (
     <div id='sp'>
-      <div id="sliderProjects" className={`${direction}`} >
+      <div id="sliderProjects" >
         {currentArticles.map((article, index) => (
           <article key={index} className="project">
             <figure>
@@ -135,7 +127,7 @@ const SliderProjects = ({ articles }: SliderProps) => {
                 </div>
               </figcaption>
             </figure>
-            <p>{index}</p>
+            <p>{article.id}</p>
           </article>
         ))}
       </div>
