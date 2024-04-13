@@ -32,6 +32,7 @@ interface Article {
   name: string;
   github_link: string;
   demo_link: string;
+  image_src: string;
 }
 
 interface SliderProps {
@@ -115,7 +116,7 @@ const SliderProjects = ({ articles }: SliderProps) => {
         {currentArticles.map((article, index) => (
           <article key={index} className="project">
             <figure>
-              <Image width={400} height={280} className='figure_img' src={Example_project.src} alt="Image du site" />
+              <Image width={400} height={280} className='figure_img' src={article.image_src} alt="Image du site" />
               <figcaption>
                 <div className='figcaption_type'><h5>{article.type}</h5></div>
                 <div className='figcaption_name'><h4>{article.name}</h4></div>
