@@ -6,7 +6,7 @@ interface DarkModeState {
     mode: boolean;
 }
 
-const storedMode = typeof window !== 'undefined' ? localStorage.getItem("darkMode") : null;
+const storedMode = typeof window !== 'undefined' ? localStorage.setItem("darkMode", JSON.stringify(false)) : null;
 const initialState: DarkModeState = {
     mode: storedMode ? JSON.parse(storedMode) : false
 };
