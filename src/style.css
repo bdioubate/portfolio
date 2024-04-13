@@ -369,6 +369,9 @@ section#projects #sliderProjects {
 .project figure {
     position: relative;
 }
+#sliderProjects .project figure img {
+    border-radius: 0 0 50px 50px;
+}
 
 .project figure figcaption {
     display: none;
@@ -378,7 +381,7 @@ section#projects #sliderProjects {
     bottom: 0;
     left: 0;
     background-color: var(--dark);
-    opacity: 0.5;
+    opacity: 0.8;
     border-radius: 0 0 50px 50px;
 }
 .project figure figcaption h4, .project figure figcaption h5{
