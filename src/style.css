@@ -78,6 +78,9 @@ html.dark-mode {
 .dark-mode header, .dark-mode input, .dark-mode textarea, .dark-mode #header__nav nav {
     background-color: var(--dark);
 }
+.dark-mode #sliderProjects .project figure > img {
+    border: 1px solid var(--light);
+}
 .dark-mode button {
     border: 2px solid var(--light);
 }
@@ -196,12 +199,12 @@ section {
     width: 100%;
     padding-top: 100px;
 }
-button, #about__main__information__skills img, #iconsFooter img{
+button, #about__main__information__skills img, #iconsFooter img, #sliderProjects figure figcaption .project_figcaption_img {
     transform: scale(1);
     transition: .8s;
     cursor: pointer;
 }
-button:hover, #about__main__information__skills img:hover, #iconsFooter img:hover{
+button:hover, #about__main__information__skills img:hover, #iconsFooter img:hover, #sliderProjects figure figcaption .project_figcaption_img:hover{
     transform: scale(1.2);
 }
 a {
@@ -368,9 +371,11 @@ section#projects #sliderProjects {
 }
 .project figure {
     position: relative;
+    cursor: pointer;
 }
-#sliderProjects .project figure img {
-    border-radius: 0 0 50px 50px;
+#sliderProjects .project figure > img {
+    border-radius: 50px 50px 54px 54px;
+    border: 1px solid var(--dark);
 }
 
 .project figure figcaption {
@@ -381,7 +386,7 @@ section#projects #sliderProjects {
     bottom: 0;
     left: 0;
     background-color: var(--dark);
-    opacity: 0.8;
+    opacity: 0.96;
     border-radius: 0 0 50px 50px;
 }
 .project figure figcaption h4, .project figure figcaption h5{
@@ -418,6 +423,7 @@ figcaption .figcaption_demo_link {
 #sliderProjects figure figcaption .project_figcaption_img {
     width: 28px;
     height: 28px;
+    margin-left: 4px;
 }
 
 #sp #sliderPagination {
