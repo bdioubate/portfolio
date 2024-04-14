@@ -376,6 +376,7 @@ section#projects #sliderProjects {
 #sliderProjects .project figure > img {
     border-radius: 50px 50px 54px 54px;
     border: 1px solid var(--dark);
+    object-fit: cover;
 }
 
 .project figure figcaption {
