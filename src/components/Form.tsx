@@ -1,11 +1,13 @@
-import { useRef, FormEvent } from 'react';
+import { useRef, FormEvent, useEffect, useState } from 'react';
 
 const Form = () => {
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const objectRef = useRef(null);
-  const msgRef = useRef(null);
+  const [validForm, setValidForm] = useState<boolean>(false);
 
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const objectRef = useRef<HTMLInputElement>(null);
+  const msgRef = useRef<HTMLTextAreaElement>(null);
+  
   const validateChamp = (champ: HTMLInputElement | HTMLTextAreaElement ) => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
       if(champ.value === "") {
@@ -31,12 +33,13 @@ const Form = () => {
   /**
  * Cette fonction permet d'afficher le message d'erreur
  */
-  function AfficheMessageErreur(erreur: string) {
-    let balise = document.getElementById(`${erreur.split('!')[1]}`);
+  const AfficheMessageErreur = (erreur: string) => {
+    const phrase = `${erreur.split('!')[0]}`
+    const balise = document.getElementById(`${erreur.split('!')[1]}`);
     if (balise && balise.parentNode instanceof HTMLElement) {
-      //balise.parentNode.dataset.errorVisible = 'true';
-      //balise.parentNode.dataset.error = `${erreur.split('!')[0]}`
-      balise.style.border = '2px solid red'; 
+      balise.dataset.errorVisible = 'true';
+      balise.parentNode.dataset.error = phrase;
+
     } else {
       console.error('Erreur : balise.parentNode est null ou n\'est pas un HTMLElement');
     }
@@ -45,12 +48,11 @@ const Form = () => {
   /**
  * Cette fonction permet de supprimer le message d'erreur
  */
-function SupprimeMessageErreur(erreur: string) {
-  let balise = document.getElementById(`${erreur}`)
+const SupprimeMessageErreur = (erreur: string) => {
+  const balise = document.getElementById(`${erreur}`)
   if (balise && balise.parentNode instanceof HTMLElement) {
-    //balise.parentNode.dataset.errorVisible = 'true';
-    //balise.parentNode.dataset.error = `${erreur.split('!')[0]}`
-    balise.style.border = ''; 
+    delete balise.dataset.errorVisible
+    delete balise.parentNode.dataset.error
   } else {
     console.error('Erreur : balise.parentNode est null ou n\'est pas un HTMLElement');
   }
@@ -60,24 +62,34 @@ function SupprimeMessageErreur(erreur: string) {
   /**
  * Cette fonction permet de gerer le formulaire
  */
-  function gererFormulaire() {
-
+  const gererFormulaire = () => {
     const nameElement = nameRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    const emailElement = emailRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    const objectElement = objectRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    const msgElement = msgRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+
+    if ((nameElement !== null) && (emailElement !== null) && (objectElement !== null) && (msgElement !== null)) {
+      SupprimeMessageErreur(`${nameElement.id}`)
+      SupprimeMessageErreur(`${emailElement.id}`)
+      SupprimeMessageErreur(`${objectElement.id}`)
+      SupprimeMessageErreur(`${msgElement.id}`)
+    }
+    
     if (nameElement !== null) {
       validateChamp(nameElement);
     }
   
-    const emailElement = emailRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    
     if (emailElement !== null) {
       validateChamp(emailElement);
     }
   
-    const objectElement = objectRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    
     if (objectElement !== null) {
       validateChamp(objectElement);
     }
   
-    const msgElement = msgRef.current as unknown as HTMLInputElement | HTMLTextAreaElement;
+    
     if (msgElement !== null) {
       validateChamp(msgElement);
     }
@@ -92,11 +104,7 @@ const validate = (e: FormEvent<HTMLFormElement>) => {
     gererFormulaire()
   } catch(error) {
     if (error instanceof Error) {
-      console.log(`${error.message.split('!')[1]}`);
-      console.error(`${error.message.split('!')[0]}`);
       AfficheMessageErreur(error.message);
-    } else {
-      console.log("pas attraper")
     }
     return false
   }
@@ -104,10 +112,32 @@ const validate = (e: FormEvent<HTMLFormElement>) => {
   return true
 }
 
+useEffect(() => {
+  // Gestion de l'événement submit sur le formulaire. 
+const form: HTMLFormElement | null = document.querySelector("form");
+form?.addEventListener("submit", (e: Event) => {
+    e.preventDefault();
+    if (!validate(e as unknown as FormEvent<HTMLFormElement>)) {
+      return;
+    }
+    setValidForm(true)
+    setTimeout(() => {
+      setValidForm(false);
+      // Réinitialiser les champs du formulaire
+      if (nameRef.current) nameRef.current.value = '';
+      if (emailRef.current) emailRef.current.value = '';
+      if (objectRef.current) objectRef.current.value = '';
+      if (msgRef.current) msgRef.current.value = '';
+    }, 5000);
+});
+}, [validForm]);
+
   return (
-    <form
+    <div id='formulaire'>
+      <form
       method="post"
       onSubmit={validate}
+      style={{ display: validForm === false ? "flex" : "none" }} 
     >
       <ul>
         <li className="li50">
@@ -138,7 +168,7 @@ const validate = (e: FormEvent<HTMLFormElement>) => {
             type="text"  
             id="object" 
             name="user_object" 
-            placeholder="Objet"
+            placeholder="Objet" 
             ref={objectRef}
           />
         </li>
@@ -154,12 +184,13 @@ const validate = (e: FormEvent<HTMLFormElement>) => {
         </li>
       </ul>
       <button type="submit">Envoyer</button>
-    </form>
+      </form>
+      <div id="message-form" style={{ display: validForm === false ? "none" : "flex" }}>
+        <h3>Message envoyé !</h3>
+      </div>
+    </div>
+    
   );
 };
 
 export default Form;
-
-/**
- * Ajouter les message d'erreur en dessous des div champ et de les supprimer
- */
