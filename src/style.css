@@ -508,7 +508,6 @@ section#contact form input {
     border: 2px solid;
     padding: 0 32px;
     outline: none;
-    position: relative;
 }
 /*section#contact form input:valid {
     border: 2px solid green;
@@ -517,9 +516,11 @@ section#contact form input:invalid {
     border: 2px solid red;
 }*/
 section#contact form input::placeholder{
-    position: absolute;
+    /*position: absolute;
     top: 24px;
-    left: 32px;
+    left: 32px;*/
+    margin-top: 24px;
+    margin-left: 32px;
 }
 
 section#contact form textarea {
@@ -530,9 +531,11 @@ section#contact form textarea {
     border: 2px solid;
 }
 section#contact form textarea::placeholder{
-    position: absolute;
+    /*position: absolute;
     top: 32px;
-    left: 32px;
+    left: 32px;*/
+    margin-top: 32px;
+    margin-left: 32px;
 }
 
 section#contact form input#name, section#contact form input#mail {
