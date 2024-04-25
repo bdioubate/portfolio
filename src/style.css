@@ -508,6 +508,7 @@ section#contact form input {
     border: 2px solid;
     padding: 0 32px;
     outline: none;
+    position: relative;
 }
 /*section#contact form input:valid {
     border: 2px solid green;
