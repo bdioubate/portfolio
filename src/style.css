@@ -517,9 +517,8 @@ section#contact form input:invalid {
 }*/
 section#contact form input::placeholder{
     position: absolute;
-    top: 50%;
+    top: 24px;
     left: 32px;
-    transform: translate(0%, -50%);
 }
 
 section#contact form textarea {
