@@ -1,10 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from "next/server";
+import { NextApiResponse } from 'next';
+import { NextResponse, NextRequest } from "next/server";
 import nodemailer from 'nodemailer';
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest, res: NextApiResponse) {
   try {
-    const { name, email, object, message } = req.body
 
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
@@ -22,9 +21,9 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     const mailOptions = {
       from: process.env.EMAIL,
       to: process.env.EMAIL_RECEIVER,
-      subject: object || "Message du portfolio",
-      text: `Nom: ${name}\nE-mail: ${email}\nMessage: ${message}`,
-      html: `<p>Nom: ${name}\n E-mail: ${email}\n Message: ${message}</p>`,
+      subject: "Message du portfolio",
+      text: `Nom: \nE-mail: \nMessage: `,
+      html: `<p>Nom: \n E-mail: \n Message: </p>`,
     };
 
     const info = await transporter.sendMail(mailOptions);
@@ -38,9 +37,4 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     res.statusCode = 500;
     return NextResponse.json({ success: false, error: "Error sending email" });
   }
-}
-
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader('Allow', ['POST']);
-  res.status(405).end(`Method ${req.method} Not Allowed. Only POST method is allowed.`);
 }
