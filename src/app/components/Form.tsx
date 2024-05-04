@@ -105,7 +105,7 @@ const validate = async (e: FormEvent<HTMLFormElement>) => {
     const object = objectRef.current?.value;
     const message = msgRef.current?.value;
 
-    const response = await fetch('https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/api/route.ts', {
+    const response = await fetch('https://api-portfolio-bangalis-projects.vercel.app/send-email', { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
