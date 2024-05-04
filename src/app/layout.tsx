@@ -2,10 +2,10 @@
 import type { Metadata } from "next";
 
 //redux
-import { Providers } from "../GlobalRedux/provider";
+import { Providers } from "./GlobalRedux/provider";
 
 //css
-import "../style.css"
+import "./style.css"
 
 export const metadata: Metadata = {
   title: "Create Next App",

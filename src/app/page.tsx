@@ -7,29 +7,29 @@ import Image from 'next/image';
 
 //assets
   //profiles
-import profileImgLight from "../assets/profiles/profile_light.svg";
-import profileImgDark from "../assets/profiles/profile_dark.svg";
+import profileImgLight from "./assets/profiles/profile_light.svg";
+import profileImgDark from "./assets/profiles/profile_dark.svg";
   //logos
-import linkedinLogo from "../assets/logos/linkedin.svg";
-import githubLogo from "../assets/logos/github.svg";
-import html5Logos from "../assets/logos/html5.svg";
-import css3Logos from "../assets/logos/css3.svg";
-import jsLogos from "../assets/logos/js.svg";
-import reactLogos from "../assets/logos/react.svg";
-import gitLogos from "../assets/logos/git.svg";
-import githubLogos from "../assets/logos/github.svg";
-import pythonLogos from "../assets/logos/python.svg";
-import javaLogos from "../assets/logos/java.svg";
+import linkedinLogo from "./assets/logos/linkedin.svg";
+import githubLogo from "./assets/logos/github.svg";
+import html5Logos from "./assets/logos/html5.svg";
+import css3Logos from "./assets/logos/css3.svg";
+import jsLogos from "./assets/logos/js.svg";
+import reactLogos from "./assets/logos/react.svg";
+import gitLogos from "./assets/logos/git.svg";
+import githubLogos from "./assets/logos/github.svg";
+import pythonLogos from "./assets/logos/python.svg";
+import javaLogos from "./assets/logos/java.svg";
   //data
 //Project
-import projectlist from "../data/projects.json"
+import projectlist from "./data/projects.json"
 
 
 //Components
-import Banner from "../components/Banner";
-import Footer from "../components/Footer";
-import Form from "../components/Form";
-import SliderProjects from "../components/SliderProjects";
+import Banner from "./components/Banner";
+import Footer from "./components/Footer";
+import Form from "./components/Form";
+import SliderProjects from "./components/SliderProjects";
 
 //redux
 import { useSelector } from 'react-redux'

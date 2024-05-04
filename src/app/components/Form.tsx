@@ -1,4 +1,5 @@
-import { useRef, FormEvent, useEffect, useState } from 'react';
+import { useRef, FormEvent, useState } from 'react';
+
 
 const Form = () => {
   const [validForm, setValidForm] = useState<boolean>(false);
@@ -10,7 +11,7 @@ const Form = () => {
   
   const validateChamp = (champ: HTMLInputElement | HTMLTextAreaElement ) => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-      if(champ.value === "") {
+      if(champ.value === "" && champ.id !== "object") {
         throw new Error(`Le champ ne doit pas etre vide !${champ.id}`)
       }
       else if((champ.id === "name") && champ.value.length < 2  ) {
@@ -18,9 +19,6 @@ const Form = () => {
       }
       else if(champ.id === "email" && regex.test(champ.value) === false) {
         throw new Error(`Veuillez remplir correctement votre e-mail !${champ.id}`)
-      }
-      else if((champ.id === "object") && champ.value.length < 2  ) {
-        throw new Error(`L'objet doit comporter au moins 2 caractères !${champ.id}`)
       }
       else if((champ.id === "msg") && champ.value.length < 10  ) {
         throw new Error(`Le message doit comporter au moins 10 caractères !${champ.id}`)
@@ -98,39 +96,40 @@ const SupprimeMessageErreur = (erreur: string) => {
 /**
  * Cette fonction permet de récupérer et valider les informations dans le formulaire
  */
-const validate = (e: FormEvent<HTMLFormElement>) => {
+const validate = async (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   try {
-    gererFormulaire()
-  } catch(error) {
-    if (error instanceof Error) {
-      AfficheMessageErreur(error.message);
-    }
-    return false
-  }
-  
-  return true
-}
+    gererFormulaire();
+    const name = nameRef.current?.value;
+    const email = emailRef.current?.value;
+    const object = objectRef.current?.value;
+    const message = msgRef.current?.value;
 
-useEffect(() => {
-  // Gestion de l'événement submit sur le formulaire. 
-const form: HTMLFormElement | null = document.querySelector("form");
-form?.addEventListener("submit", (e: Event) => {
-    e.preventDefault();
-    if (!validate(e as unknown as FormEvent<HTMLFormElement>)) {
-      return;
+    const response = await fetch('http://localhost:3000/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, object, message }),
+    });
+
+    if (response.ok) {
+      setValidForm(true);
+      setTimeout(() => {
+        setValidForm(false);
+        if (nameRef.current) nameRef.current.value = '';
+        if (emailRef.current) emailRef.current.value = '';
+        if (objectRef.current) objectRef.current.value = '';
+        if (msgRef.current) msgRef.current.value = '';
+      }, 5000);
+    } else {
+      console.error('Failed to send email:', response.statusText);
     }
-    setValidForm(true)
-    setTimeout(() => {
-      setValidForm(false);
-      // Réinitialiser les champs du formulaire
-      if (nameRef.current) nameRef.current.value = '';
-      if (emailRef.current) emailRef.current.value = '';
-      if (objectRef.current) objectRef.current.value = '';
-      if (msgRef.current) msgRef.current.value = '';
-    }, 5000);
-});
-}, [validForm]);
+  } catch (error: any) {
+    AfficheMessageErreur(error.message)
+    console.error('Error sending email:', error);
+  }
+};
 
   return (
     <div id='formulaire'>
