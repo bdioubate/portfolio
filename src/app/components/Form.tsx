@@ -105,7 +105,7 @@ const validate = async (e: FormEvent<HTMLFormElement>) => {
     const object = objectRef.current?.value;
     const message = msgRef.current?.value;
 
-    const response = await fetch('http://localhost:3000/api', {
+    const response = await fetch('https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/api/route.ts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
