@@ -97,5 +97,60 @@
         "demo_link": "https://github.com/bdioubate",
         "github_link": "https://github.com/bdioubate",
         "notes": ""
+    },
+    {
+        "id": 9,
+        "name": "Kasa",
+        "description": "Développez une application Web d'une agence location d’appartements avec React et React Router",
+        "type": "site web",
+        "image_src": "https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/assets/projects/kasa.png",
+        "image_alt": "Une capture d'ecran du site web Kasa",
+        "demo_link": "https://github.com/bdioubate",
+        "github_link": "https://github.com/bdioubate",
+        "notes": ""
+    },
+    {
+        "id": 10,
+        "name": "SportSee",
+        "description": "Développez un tableau de bord d'analytics d'une startup dédiée au coaching sportif avec React",
+        "type": "site web",
+        "image_src": "https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/assets/projects/sportsee.png",
+        "image_alt": "Une capture d'ecran du site web SportSee",
+        "demo_link": "https://github.com/bdioubate",
+        "github_link": "https://github.com/bdioubate/SportSee",
+        "notes": ""
+    },
+    {
+        "id": 11,
+        "name": "Argent Bank",
+        "description": "Utilisez une API pour un compte utilisateur bancaire chez Argent Bank avec React",
+        "type": "site web",
+        "image_src": "https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/assets/projects/argent_bank.png",
+        "image_alt": "Une capture d'ecran du site web Argent Bank",
+        "demo_link": "https://github.com/bdioubate",
+        "github_link": "https://github.com/bdioubate/Argent-Bank",
+        "notes": ""
+    },
+    {
+        "id": 12,
+        "name": "WealthHealth",
+        "description": "Convertir l'ensemble d'une application web jQuery vers React",
+        "type": "site web",
+        "image_src": "https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/assets/projects/hrnet.png",
+        "image_alt": "Une capture d'ecran du site web WealthHealth",
+        "demo_link": "https://github.com/bdioubate",
+        "github_link": "https://github.com/bdioubate/HRnet",
+        "notes": ""
+    },
+    {
+        "id": 13,
+        "name": "Billed",
+        "description": "Débuggez et testez un SaaS RH",
+        "type": "site web",
+        "image_src": "https://raw.githubusercontent.com/bdioubate/portfolio/main/src/app/assets/projects/billed.png",
+        "image_alt": "Une capture d'ecran du site web Billed",
+        "demo_link": "https://github.com/bdioubate",
+        "github_link": "https://github.com/bdioubate",
+        "notes": ""
     }
 ]
