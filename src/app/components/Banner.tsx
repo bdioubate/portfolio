@@ -62,7 +62,7 @@ const Header = () => {
   return (
     <header id="header">
       <div id="header__name">
-        <h3>Bangali DIOUBATE</h3>
+        <Link href=""><h3>Bangali DIOUBATE</h3></Link>
       </div>
       <div id="header__nav">
         <nav>

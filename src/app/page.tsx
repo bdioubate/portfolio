@@ -89,7 +89,9 @@ export default function Home() {
                 j&apos;ai acquis une grande expertise dans la conception et le développement de sites web modernes et dynamiques.</p>
               </div>
               <div id="about__main__information">
-                <button>Telecharger mon CV</button>
+                <a href="/CV.pdf" download>
+                  <button>Telecharger mon CV</button>
+                </a>
                 <div id="about__main__information__skills">
                   <Image width={80} height={80} src={html5Logos.src} alt="Logo HTML5" />
                   <Image width={80} height={80} src={css3Logos.src} alt="Logo CSS3" />
