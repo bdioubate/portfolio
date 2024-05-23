@@ -334,7 +334,6 @@ div#about__main__information__skills {
 
 /* Projects */
 section#projects {
-     /*border: 1px solid;*/
      display: flex;
      flex-direction: column;
      align-items: center;
@@ -348,11 +347,6 @@ section#projects #sp{
     gap: 80px 0;
 }
 section#projects #sliderProjects {
-    /*display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    /*grid-template-rows: repeat(auto-fill, 280px);
-    grid-column-gap: 40px;
-    grid-row-gap: 40px;*/
     display: grid;
    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 38px;
@@ -379,17 +373,22 @@ section#projects #sliderProjects {
     border: 1px solid var(--dark);
     object-fit: cover;
 }
-
 .project figure figcaption {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     width: 100%;
     height: 80%;
     bottom: 0;
     left: 0;
     background-color: var(--dark);
-    opacity: 0.88;
     border-radius: 0 0 50px 50px;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    justify-items: center;
+    align-items: center;
 }
 .project figure figcaption h4, .project figure figcaption h5{
     color: var(--light);
@@ -401,13 +400,9 @@ section#projects #sliderProjects {
     border-radius: 50px;
     
 }
-
 .project figure:hover figcaption {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
-    justify-items: center;
-    align-items: center;
+    opacity: 0.88;
+    visibility: visible;
 }
 figcaption .figcaption_type {
     grid-area: 1 / 1 / 2 / 3;
@@ -509,16 +504,8 @@ section#contact form input {
     padding: 0 32px;
     outline: none;
 }
-/*section#contact form input:valid {
-    border: 2px solid green;
-}
-section#contact form input:invalid {
-    border: 2px solid red;
-}*/
+
 section#contact form input::placeholder{
-    /*position: absolute;
-    top: 24px;
-    left: 32px;*/
     margin-top: 24px;
     margin-left: 32px;
 }
@@ -531,9 +518,6 @@ section#contact form textarea {
     border: 2px solid;
 }
 section#contact form textarea::placeholder{
-    /*position: absolute;
-    top: 32px;
-    left: 32px;*/
     margin-top: 32px;
     margin-left: 32px;
 }
@@ -774,10 +758,6 @@ footer#footer .divFooter p {
             width: 24px;
         }
     }
-   
-
-
-/* SliderProjects.css */
 
 /* Animation de défilement depuis la droite */
 @keyframes slideInFromRight {
