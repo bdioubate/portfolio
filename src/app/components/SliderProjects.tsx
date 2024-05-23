@@ -1,14 +1,8 @@
-//react
-import { useEffect, useState } from 'react';
-
-//next
+import { useEffect, useState } from 'react'; 
 import Link from "next/link";
 import Image from 'next/image';
 
-//assets
-    //logos
 import Example_project from "../assets/projects/Example_project.png";
-    //icons
 import Chevron_prev_dark from "../assets/icons/chevron_prev_dark.svg";
 import Chevron_next_dark from "../assets/icons/chevron_next_dark.svg";
 import Chevron_prev_light from "../assets/icons/chevron_prev_light.svg";
@@ -22,7 +16,7 @@ import Demo_link from "../assets/icons/demo_link_light.svg";
 import { useSelector } from 'react-redux'
 interface RootState {
   darkMode: {
-      mode: boolean;
+      mode: boolean; 
   };
 }
 
@@ -39,11 +33,12 @@ interface SliderProps {
   articles: Article[];
 }
 
-const SliderProjects = ({ articles }: SliderProps) => {
+const SliderProjects: React.FC<SliderProps> = ({ articles }) => {
   const { mode } = useSelector((state: RootState) => state.darkMode);
 
-  const [articlesPerPage, setArticlesPerPage] = useState(6); // Par défaut 6 articles par page
-  const [currentPage, setCurrentPage] = useState(1); // Page actuelle
+  const [articlesPerPage, setArticlesPerPage] = useState(6);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,37 +51,47 @@ const SliderProjects = ({ articles }: SliderProps) => {
         newArticlesPerPage = 1;
       }
 
-      // Vérifier si la page actuelle dépasse le nombre total de pages après le changement de pagination
       const totalPages = Math.ceil(articles.length / newArticlesPerPage);
       setCurrentPage(Math.min(currentPage, totalPages));
 
       setArticlesPerPage(newArticlesPerPage);
     };
 
-    // Ajouter un écouteur d'événement pour surveiller les changements de taille de fenêtre
     window.addEventListener('resize', handleResize);
-
-    // Appel initial de handleResize pour ajuster la pagination en fonction de la largeur de l'écran au chargement de la page
     handleResize();
 
-    // Supprimer l'écouteur d'événement lors du démontage du composant
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [articles, currentPage]);
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    if (currentPage < totalPages) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+        setIsTransitioning(false);
+      }, 400);
+    }
   };
 
   const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    
+    if (currentPage > 1) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+        setIsTransitioning(false);
+      }, 400);
+    }
   };
 
   const handlePaginationClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  }
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+      setIsTransitioning(false);
+    }, 400);
+  };
 
   const renderPagination = () => {
     const pagination = [];
@@ -94,10 +99,8 @@ const SliderProjects = ({ articles }: SliderProps) => {
       pagination.push(
         <button className='btn_pagination' key={i} onClick={() => handlePaginationClick(i + 1)}>
           {currentPage === i + 1
-            ? 
-            <Image width={20} height={20} src={Btn_pagination.src} alt="Bouton actuelle de la pagination" /> 
-                : 
-            <Image width={20} height={20} src={Btn_pagination__gray.src} alt="Bouton actuelle de la pagination" />}
+            ? <Image width={20} height={20} src={Btn_pagination.src} alt="Bouton actuelle de la pagination" /> 
+            : <Image width={20} height={20} src={Btn_pagination__gray.src} alt="Bouton actuelle de la pagination" />}
         </button>
       );
     }
@@ -112,7 +115,7 @@ const SliderProjects = ({ articles }: SliderProps) => {
 
   return (
     <div id='sp'>
-      <div id="sliderProjects" >
+      <div id="sliderProjects" className={isTransitioning ? 'transition' : ''}>
         {currentArticles.map((article, index) => (
           <article key={index} className="project">
             <figure>
@@ -133,8 +136,8 @@ const SliderProjects = ({ articles }: SliderProps) => {
         ))}
       </div>
       <div id='sliderPagination'>
-        <button className='chevron_project' id='chevron_project_prev' onClick={handlePrevPage} disabled={currentPage === 1} >
-          <Image width={80} height={80} src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent"  style={{ opacity: currentPage === 1 ? 0.4 : 1 }}  />
+        <button className='chevron_project' id='chevron_project_prev' onClick={handlePrevPage} disabled={currentPage === 1}>
+          <Image width={80} height={80} src={mode ? Chevron_prev_light.src : Chevron_prev_dark.src} alt="Chevron precedent" style={{ opacity: currentPage === 1 ? 0.4 : 1 }} />
         </button>
         {renderPagination()}
         <button className='chevron_project' id='chevron_project_next' onClick={handleNextPage} disabled={currentPage === totalPages}>

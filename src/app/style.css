@@ -84,8 +84,12 @@ html.dark-mode {
 .dark-mode button {
     border: 2px solid var(--light);
 }
-.dark-mode #wrapper div {
+.dark-mode #wrapper div, .dark-mode #header__nav a:hover::before {
     border-color: var(--light);
+}
+
+.dark-mode #header__nav a::before{
+    border: 1px solid var(--dark);
 }
 
 /* z-index */
@@ -223,6 +227,14 @@ header {
     z-index: 2;
 }
 
+header #header__name {
+    transition: transform 0.6s ease, color 0.6s ease;
+}
+
+header #header__name:hover {
+    transform: scale(1.05);
+}
+
 header #header__nav {
     display: flex;
     align-items: center;
@@ -258,6 +270,29 @@ header h3, header #header__nav nav a {
     top: 24px;
     right: 24px;
 }
+
+#header__nav a {
+    position: relative;
+    transition: transform 0.6s ease, color 0.6s ease;
+}
+
+#header__nav a::before{
+    content: "";
+    border: 1px solid var(--light);
+    position: absolute;
+    top: 24px;
+    display: block;
+    width: 100%;
+}
+
+#header__nav a:hover::before{
+    border-color: var(--dark);
+}
+
+#header__nav a:hover {
+    transform: scale(1.1);
+}
+
 #header__nav #display_menu {
     display: none;
 }
@@ -786,10 +821,10 @@ footer#footer .divFooter p {
 
   /* Appliquer l'animation pour la direction 'prev' */
 #sliderProjects.prev, #sliderPagination.prev {
-    animation: slideInFromLeft 1.8s ease; /* Utilisez une durée plus longue pour un défilement plus lent */
+    animation: slideInFromLeft 1.8s ease; 
   }
   
   /* Appliquer l'animation pour la direction 'next' */
   #sliderProjects.next, #sliderPagination.next {
-    animation: slideInFromRight 1.8s ease; /* Utilisez une durée plus longue pour un défilement plus lent */
+    animation: slideInFromRight 1.8s ease; 
   }
