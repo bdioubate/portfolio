@@ -55,13 +55,17 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
+      - name: Copy files to temp directory without symlinks
+        run: |
+          mkdir temp_out
+          cp -rL .next/server/pages temp_out/pages
+          cp -rL .next/static temp_out/static
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: |
-            .next/server/pages
-            .next/static
+          path: temp_out
 
   # Run Playwright tests inside Docker container
   test:
