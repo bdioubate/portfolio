@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build Job
+  # Build Docker image
   build:
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +37,7 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
-      - name: Upload build artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: nextjs-build
@@ -60,7 +60,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest
 
-  # Test Job
+  # Run Playwright tests inside Docker container
   test:
     runs-on: ubuntu-latest
     needs: build
@@ -68,23 +68,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: nextjs-build
-          path: .next
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Playwright tests
-        run: npx playwright test
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Run Playwright tests inside Docker container
         run: |
