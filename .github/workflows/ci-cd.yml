@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build and Deploy Next.js app
+  # Build Docker image
   build:
     runs-on: ubuntu-latest
     steps:
@@ -43,6 +43,23 @@ jobs:
         with:
           name: nextjs-build
           path: .next
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest
 
   # Run Playwright tests inside Docker container
   test:
@@ -74,11 +91,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: nextjs-build
-          path: .next
+          path: ./artifact
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          path: .next
           artifact_name: nextjs-build
