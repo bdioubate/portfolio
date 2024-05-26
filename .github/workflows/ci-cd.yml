@@ -17,20 +17,28 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build Docker image
-  build:
+  # Matrix build and test job
+  build_and_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12, 14, 16]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Cache Node.js modules
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
 
       - name: Install dependencies
         run: npm install
@@ -38,10 +46,13 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
+      - name: Run Playwright tests
+        run: npx playwright test
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: nextjs-build
+          name: nextjs-build-${{ matrix.node-version }}
           path: .next
 
       - name: Set up Docker Buildx
@@ -59,42 +70,30 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:${{ matrix.node-version }}-latest
 
-  # Run Playwright tests inside Docker container
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      - name: Run Playwright tests inside Docker container
-        run: |
-          docker run --rm ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest npx playwright test
-
-  # Deploy to GitHub Pages
+  # Deploy job (runs after all build_and_test jobs complete)
   deploy:
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: build_and_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download artifact
+      - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          name: nextjs-build
-          path: ./artifact
+          name: |
+            nextjs-build-12
+            nextjs-build-14
+            nextjs-build-16
+          path: .next
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: nextjs-build
+          artifact_name: |
+            nextjs-build-12
+            nextjs-build-14
+            nextjs-build-16
