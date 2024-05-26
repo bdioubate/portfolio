@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build Docker image
+  # Build, test, and deploy job
   build:
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +31,9 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -49,20 +52,17 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Build Next.js app
         run: npm run build
+
+      - name: Export static site
+        run: npm run export
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: |
-            .next/static
-            .next/server
-            .next/*.html
+          path: out
 
   # Run Playwright tests inside Docker container
   test:
