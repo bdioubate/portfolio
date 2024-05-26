@@ -41,14 +41,24 @@ jobs:
       - name: Copy build files from container
         run: docker cp build-container:/app/.next .next
 
+      - name: Start container in detached mode
+        run: docker run --name test-container -d my-nextjs-app
+
       - name: Run Playwright tests inside container
-        run: docker exec build-container npx playwright test
+        run: docker exec test-container npx playwright test
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
           name: nextjs-build
           path: .next
+
+      - name: Stop and remove containers
+        run: |
+          docker stop build-container
+          docker rm build-container
+          docker stop test-container
+          docker rm test-container
 
   deploy:
     runs-on: ubuntu-latest
