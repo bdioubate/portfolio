@@ -82,7 +82,7 @@ jobs:
   # Deploy to GitHub Pages
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, test]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
