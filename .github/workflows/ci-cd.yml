@@ -49,6 +49,9 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-nextjs-app:latest
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Build Next.js app
         run: npm run build
 
