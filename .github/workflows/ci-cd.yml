@@ -98,9 +98,8 @@ jobs:
         with:
           name: nextjs-build
           path: .next
-
-      - name: Verify downloaded artifact
-        run: ls -la .next
+      - name: Display structure of downloaded files
+        run: ls -R .next
 
       - name: Deploy to Vercel
         run: npx vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
