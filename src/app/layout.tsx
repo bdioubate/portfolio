@@ -1,11 +1,12 @@
 //next
 import type { Metadata } from "next";
+import Head from "next/head";
 
 //redux
 import { Providers } from "./GlobalRedux/provider";
 
 //css
-import "./style.css"
+import "./style.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +19,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      {children}
-    </Providers>
+    <>
+      {/* Balise Google Analytics */}
+      <Head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-PYCJMB11VS"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-PYCJMB11VS');
+            `,
+          }}
+        />
+      </Head>
+
+      {/* Fournisseurs et contenu */}
+      <Providers>
+        {children}
+      </Providers>
+    </>
   );
 }
